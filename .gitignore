@@ -1,0 +1,10 @@
+/.venv
+/.idea
+/data
+
+__pycache__
+*.pyc
+
+*.session
+*.session-journal
+config.ini
