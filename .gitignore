@@ -1,9 +1,8 @@
-/.venv
-!/.venv/pyvenv.cfg
-!/requirement.txt
-
+.venv
 *.DS_Store
 *.csv
 *.txt
 *.zip
 *.session
+
+!requirement.txt
