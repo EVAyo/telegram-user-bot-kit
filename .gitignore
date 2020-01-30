@@ -1,8 +1,8 @@
 .venv
 *.DS_Store
-*.csv
-*.txt
+-*-members.csv
+-*-history.csv
 *.zip
-*.session
+*_account.session
 
 !requirement.txt
