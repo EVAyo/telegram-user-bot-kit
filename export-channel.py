@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import csv
+import sys
 import time
 from datetime import datetime
 
@@ -22,7 +23,7 @@ def export_channel(chat_id: int):
 
 
 def main():
-    chat_id = int(input("Chat ID: "))
+    chat_id = int(sys.argv[1])
     app.start()
     export_channel(chat_id)
     app.stop()

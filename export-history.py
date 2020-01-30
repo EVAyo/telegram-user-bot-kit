@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import csv
+import sys
 import time
 from datetime import datetime, timedelta
 from typing import Generator
@@ -78,7 +79,7 @@ def export_history(chat_id: int):
 
 
 def main():
-    chat_id = int(input("Chat ID: "))
+    chat_id = int(sys.argv[1])
     app.start()
     export_members(chat_id)
     export_history(chat_id)
