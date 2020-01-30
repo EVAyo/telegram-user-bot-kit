@@ -1,5 +1,6 @@
 .venv
 !.venv/pyvenv.cfg
+!requirement.txt
 
 *.DS_Store
 *.csv
