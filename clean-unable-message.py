@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-import time
 import sys
+import time
 from datetime import datetime, timedelta
 from typing import Generator
 
