@@ -52,12 +52,12 @@ def clean_deleted_account(chat_id: int):
             continue
         try:
             remove_deleted_account(chat_id, member)
-        except BadRequest as e:
-            print("#%s #%s %s" % (chat_id, member.user.id, e.MESSAGE))
+        except BadRequest as err:
+            print("#%s #%s %s" % (chat_id, member.user.id, err))
             remove_deleted_account(chat_id, member)
-        except FloodWait as e:
-            print("#%s #%s %s" % (chat_id, member.user.id, e.MESSAGE))
-            time.sleep(e.x)
+        except FloodWait as err:
+            print("#%s #%s %s" % (chat_id, member.user.id, err))
+            time.sleep(err.x + 0.5)
             remove_deleted_account(chat_id, member)
 
 
