@@ -1,8 +1,6 @@
 .venv
-*.DS_Store
-*.zip
-*_account.session
 
-!requirement.txt
-
-data/*.csv
+/*_account.session
+/config.ini
+/requirement.txt
+/data
