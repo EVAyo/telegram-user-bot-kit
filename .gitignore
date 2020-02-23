@@ -1,7 +1,8 @@
 .venv
 *.DS_Store
--*-*.csv
 *.zip
 *_account.session
 
 !requirement.txt
+
+data/*.csv

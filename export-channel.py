@@ -10,7 +10,7 @@ app = Client("my_account")
 
 
 def export_channel(chat_id: int):
-    fp = open("%s-channel.csv" % chat_id, "w", newline="")
+    fp = open("data/%s-channel.csv" % chat_id, "w", newline="")
     writer = csv.writer(fp)
     writer.writerow(["Date", "Message"])
     for message in app.iter_history(chat_id=chat_id):

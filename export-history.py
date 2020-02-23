@@ -14,7 +14,7 @@ app = Client("my_account")
 
 
 def export_members(chat_id: int):
-    fp = open("%s-members.csv" % chat_id, "w", encoding="utf-8-sig", newline="")
+    fp = open("data/%s-members.csv" % chat_id, "w", encoding="utf-8-sig", newline="")
     writer = csv.writer(fp)
     header = [
         "User ID",
@@ -38,7 +38,7 @@ def export_members(chat_id: int):
         except BadRequest as e:
             print("#%s #%s %s" % (chat_id, member.user.id, e.MESSAGE))
         except FloodWait as err:
-            time.sleep(err.x)
+            time.sleep(err.x + 0.5)
             writer.writerow(get_full_user_row(member))
         fp.flush()
     fp.close()
@@ -62,7 +62,7 @@ def get_full_user_row(member: ChatMember):
 
 
 def export_history(chat_id: int):
-    fp = open("%s-history.csv" % chat_id, "w", newline="")
+    fp = open("data/%s-history.csv" % chat_id, "w", newline="")
     writer = csv.writer(fp)
     writer.writerow(["Date", "User ID"])
     for message in app.iter_history(chat_id=chat_id):
