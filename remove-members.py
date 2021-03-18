@@ -2,6 +2,7 @@
 import csv
 import sys
 import time
+
 from pyrogram import Client
 
 import user_bot_kit.users
@@ -17,9 +18,9 @@ def remove_user_ids(chat_id: int):
             yield int(row["User ID"])
 
 
-def clean(chat_id: int):
+async def clean(chat_id: int):
     removable_user_ids = set(remove_user_ids(chat_id))
-    current_user_ids = {member.user.id for member in app.iter_chat_members(chat_id=chat_id)}
+    current_user_ids = {member.user.id async for member in app.iter_chat_members(chat_id=chat_id)}
     user_ids = removable_user_ids & current_user_ids
 
     print("remain count: %d" % len(user_ids))
@@ -32,11 +33,11 @@ def clean(chat_id: int):
         print("#%s #%s Deleted" % (chat_id, user_id))
 
 
-def main():
-    app.start()
+async def main():
+    await app.start()
     for chat_id in sys.argv[1:]:
-        clean(int(chat_id))
-    app.stop()
+        await clean(int(chat_id))
+    await app.stop()
 
 
 if __name__ == "__main__":

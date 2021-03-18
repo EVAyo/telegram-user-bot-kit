@@ -8,14 +8,14 @@ from user_bot_kit.message import is_bot_command
 app = Client("bot")
 
 
-def remove_unable_message(chat_id: int):
-    for message in app.iter_history(chat_id=chat_id):
+async def remove_unable_message(chat_id: int):
+    async for message in app.iter_history(chat_id=chat_id):
         if is_bot_command(message) or message.dice:
-            message.delete()
+            await message.delete()
         if not message.service:
             continue
         if message.left_chat_member or message.new_chat_members:
-            message.delete()
+            await message.delete()
 
 
 def main():

@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 import sys
-from itertools import chain
 
-from pyrogram import Client, ChatMember
+from pyrogram import Client
+from pyrogram.types import ChatMember
 
 from user_bot_kit import retry
-from user_bot_kit.users import remove_member
+from user_bot_kit.users import remove_member, get_users
 
 app = Client("bot")
 
@@ -19,13 +19,10 @@ def is_scp_079(member: ChatMember):
     return username.startswith("SCP_079")
 
 
-def clean_removed_users(chat_id: int):
+async def clean_removed_users(chat_id: int):
     remove = retry(remove_member)
-    members = chain(
-        app.iter_chat_members(chat_id=chat_id, filter="kicked"),
-        app.iter_chat_members(chat_id=chat_id, filter="restricted")
-    )
-    for member in members:
+
+    async for member in get_users(app, chat_id, filters=['kicked', 'restricted']):
         if is_scp_079(member):
             continue
         remove(app, chat_id, member)

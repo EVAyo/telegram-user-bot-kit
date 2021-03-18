@@ -1,20 +1,18 @@
 #!/usr/bin/env python3
-from typing import Generator
-
-from pyrogram import Chat, Client, Dialog
+from pyrogram import Client
+from pyrogram.types import Chat, Dialog
 
 app = Client("bot")
 
 
-# noinspection PyBroadException
-def get_chats() -> Generator[Chat, None, None]:
-    self_id = app.get_me().id
-    for dialog in app.iter_dialogs():
+async def get_chats():
+    self_id = (await app.get_me()).id
+    async for dialog in app.iter_dialogs():
         dialog: Dialog
         chat = dialog.chat
         status = None
         try:
-            status = chat.get_member(self_id).status
+            status = (await chat.get_member(self_id)).status
         except:
             pass
         yield chat, status
@@ -28,9 +26,9 @@ def display_name(chat: Chat):
     return chat.first_name
 
 
-def main():
-    app.start()
-    for chat, status in sorted(get_chats(), key=lambda _: _[1] or ""):
+async def main():
+    await app.start()
+    async for chat, status in get_chats():
         row = "#%14s | %-20s | %-40s | %-13s | %s" % (
             chat.type,
             chat.id,
@@ -39,7 +37,7 @@ def main():
             display_name(chat),
         )
         print(row)
-    app.stop()
+    await app.stop()
 
 
 if __name__ == "__main__":
