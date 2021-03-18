@@ -28,7 +28,7 @@ async def clean(chat_id: int):
 
     kick_chat_member = user_bot_kit.retry(app.kick_chat_member)
     for user_id in user_ids:
-        until_date = int(time.time() + 60)
+        until_date = int(time.time() + 3600)
         kick_chat_member(chat_id, user_id, until_date)
         print("#%s #%s Deleted" % (chat_id, user_id))
 
